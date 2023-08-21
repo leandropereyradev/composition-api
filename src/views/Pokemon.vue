@@ -12,7 +12,7 @@
 
 <script>
 import { watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, onBeforeRouteLeave } from 'vue-router'
 import usePokemonSearch from '../composables/usePokemonSearch'
 
 export default {
@@ -23,6 +23,12 @@ export default {
 
     //Necesitamos un watch porque, al estar utilizando un keep-alive, no vuelve a tomar el parámetro del URL. Si no estuviera el keep-alive, la página refrescaría, se desmontaría y al volver a hacer la búsqueda, vuelve a tomar el parámetro de la URL
     watch(() => route.params.id, (/*value, prevValue*/) => searchPokemon(route.params.id))
+
+    onBeforeRouteLeave(() => {
+      const answer = window.confirm('Está seguro que desea salir?')
+
+      if (!answer) return false //El false bloquea la salida de la página
+    })
 
     return {
       errorMessage,
