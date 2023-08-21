@@ -3,7 +3,8 @@
     <router-link :to="{ name: 'home' }">Home</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link> |
     <router-link :to="{ name: 'counter' }">Counter</router-link> |
-    <router-link :to="{ name: 'users' }">Usuarios</router-link>
+    <router-link :to="{ name: 'users' }">Usuarios</router-link> |
+    <router-link :to="{ name: 'pokemon-search' }">Buscar Pokemon</router-link>
   </nav>
   <router-view v-slot="{ Component, route }">
     <!-- Component: Muestra el nombre del componente | key: utiliza el route para extraer el nombre que le hemos puesto en las rutas -->

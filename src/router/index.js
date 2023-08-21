@@ -25,6 +25,20 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "users" */ "../views/Users.vue"),
   },
+  {
+    path: "/pokemon-search",
+    name: "pokemon-search",
+    component: () =>
+      import(
+        /* webpackChunkName: "search pokemon" */ "../views/SearchPokemon.vue"
+      ),
+  },
+  {
+    path: "/pokemon/:id",
+    name: "pokemon-id",
+    component: () =>
+      import(/* webpackChunkName: "pokemon" */ "../views/Pokemon.vue"),
+  },
 ];
 
 const router = createRouter({
