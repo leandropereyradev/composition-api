@@ -5,7 +5,7 @@
 
   <h5 v-if="errorMessage">{{ errorMessage }}</h5>
 
-  <div v-if="users.length > 0">
+  <div v-if="users?.length > 0">
     <ul>
       <li v-for="user in users" :key="user.id">
         <h4>{{ user.first_name }} {{ user.last_name }}</h4>
@@ -20,52 +20,23 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import axios from 'axios'
+import useUsers from '@/composables/useUsers'
 
 export default {
   setup() {
-    const currentPage = ref(1)
-    const errorMessage = ref()
-    const isLoading = ref(true)
-    const users = ref([])
-
-    const getUsers = async (page = 1) => {
-      if (page <= 0) page = 1
-
-      isLoading.value = true
-
-      const { data } = await axios.get('https://reqres.in/api/users', {
-        params: {
-          page
-        }
-      })
-
-      console.log(data);
-
-      if (data.data.length > 0) {
-        users.value = data.data
-        currentPage.value = page
-        errorMessage.value = null
-
-      } else if (currentPage.value > 0) {
-        errorMessage.value = 'No hay mas registros'
-      }
-
-      isLoading.value = false
-
-    }
-
-    getUsers()
+    const { currentPage, errorMessage, isLoading, users, nextPage, prevPage } = useUsers()
 
     return {
       currentPage,
       errorMessage,
       isLoading,
       users,
+      nextPage,
+      prevPage,
 
-      nextPage: () => getUsers(currentPage.value + 1),
-      prevPage: () => getUsers(currentPage.value - 1),
+      // Tambien se puede utilizar la desestructuración del useUsers ya que retorna los atrivutos que hemos usado en el template
+      //...useUsers()
+      //El inconveniente es que, si hay mas cosas, no sabremos de donde vienen los atributos usados en el template
     }
   }
 
