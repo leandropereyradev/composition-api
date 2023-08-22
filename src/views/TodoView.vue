@@ -1,6 +1,11 @@
 <template>
   <h1>Lista de tareas de Thanos</h1>
-  <h4>Tareas: {{ pending.length }}</h4>
+  <h4>Pendientes: {{ pending.length }}</h4>
+
+  <hr>
+
+  <h4>Todas las tareas: {{ all.length }}</h4>
+  <h4>Completados: {{ completed.length }}</h4>
 </template>
 
 <script>
@@ -12,7 +17,9 @@ export default {
     const store = useStore()
 
     return {
-      pending: computed(() => store.getters['pendingTodos'])
+      pending: computed(() => store.getters['pendingTodos']),
+      all: computed(() => store.getters['allTodos']),
+      completed: computed(() => store.getters['completedTodos']),
     }
   }
 

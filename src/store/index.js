@@ -32,7 +32,19 @@ export default createStore({
   },
   getters: {
     pendingTodos(state, getters, rootState) {
+      // state: usa es state de este store
+      //getter: usa los getters de este store ej.: getters.allTodos
+      //rootState: es el state global de la aplicación
+
       return state.todos.filter((todo) => !todo.completed);
+    },
+
+    allTodos: (state, getters, rootState) => {
+      return state.todos;
+    },
+
+    completedTodos: (state, getters, rootState) => {
+      return state.todos.filter((todo) => todo.completed);
     },
   },
   mutations: {},
