@@ -4,13 +4,21 @@
 
   <hr>
 
-  <button class="active">Todas las tareas</button>
-  <button>Pendientes</button>
-  <button>Completados</button>
+  <button :class="{ 'active': currentTab === 'all' }" @click="currentTab = 'all'">
+    Todas las tareas
+  </button>
+
+  <button :class="{ 'active': currentTab === 'pending' }" @click="currentTab = 'pending'">
+    Pendientes
+  </button>
+
+  <button :class="{ 'active': currentTab === 'completed' }" @click="currentTab = 'completed'">
+    Completados
+  </button>
 
   <div>
     <ul>
-      <li v-for="todo in all" :key="todo.id" :class="{ 'completed': todo.completed }">
+      <li v-for="todo in getTodoByTab" :key="todo.id" :class="{ 'completed': todo.completed }">
         {{ todo.text }}
       </li>
     </ul>
@@ -18,17 +26,22 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   setup() {
     const store = useStore()
+    const currentTab = ref('all')
 
     return {
+      currentTab,
+
       pending: computed(() => store.getters['pendingTodos']),
       all: computed(() => store.getters['allTodos']),
       completed: computed(() => store.getters['completedTodos']),
+
+      getTodoByTab: computed(() => store.getters['getTodosByTab'](currentTab.value))
     }
   }
 
