@@ -51,6 +51,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "slots" */ "../views/CustomSlot.vue"),
   },
+  {
+    path: "/users-scoped",
+    name: "users-scoped",
+    component: () =>
+      import(
+        /* webpackChunkName: "Users Scoped" */ "../views/UsersScopedSlot.vue"
+      ),
+  },
 ];
 
 const router = createRouter({

@@ -4,6 +4,7 @@
     <router-link :to="{ name: 'about' }">About</router-link> |
     <router-link :to="{ name: 'counter' }">Counter</router-link> |
     <router-link :to="{ name: 'users' }">Usuarios</router-link> |
+    <router-link :to="{ name: 'users-scoped' }">Usuarios Scoped Slot</router-link> |
     <router-link :to="{ name: 'pokemon-search' }">Buscar Pokemon</router-link> |
     <router-link :to="{ name: 'todo' }">Thanos ToDo</router-link> |
     <router-link :to="{ name: 'slots' }">Slots</router-link>
