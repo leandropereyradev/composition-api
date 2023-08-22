@@ -4,8 +4,17 @@
 
   <hr>
 
-  <h4>Todas las tareas: {{ all.length }}</h4>
-  <h4>Completados: {{ completed.length }}</h4>
+  <button class="active">Todas las tareas</button>
+  <button>Pendientes</button>
+  <button>Completados</button>
+
+  <div>
+    <ul>
+      <li v-for="todo in all" :key="todo.id" :class="{ 'completed': todo.completed }">
+        {{ todo.text }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -26,4 +35,29 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+div {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+ul {
+  width: 350px;
+  text-align: left;
+}
+
+li {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.active {
+  background-color: #2c3e50;
+  color: aliceblue;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+</style>
