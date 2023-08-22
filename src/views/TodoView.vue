@@ -27,27 +27,28 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
+import useTodos from '@/composables/useTodos'
 
 export default {
   setup() {
-    const store = useStore()
-    const currentTab = ref('all')
+    const {
+      currentTab,
+      getTodoByTab,
+      pending,
+      toggleTodo,
+    } = useTodos()
 
     return {
       currentTab,
 
       //Getters
-      all: computed(() => store.getters['allTodos']),
-      completed: computed(() => store.getters['completedTodos']),
-      pending: computed(() => store.getters['pendingTodos']),
+      pending,
 
       //Getters como fonciones con parámetro
-      getTodoByTab: computed(() => store.getters['getTodosByTab'](currentTab.value)),
+      getTodoByTab,
 
       //Mutations
-      toggleTodo: (id) => store.commit('toggleTodo', id)
+      toggleTodo,
 
     }
   }
